@@ -7,4 +7,11 @@ class ClienteParticular(Cliente):
         self.nombre = nombre
         self.apellido = apellido
         super().__init__(telefono, mail, id_cliente)
-         
+        self.clientes=[]
+        
+    def nuevo_paticular(self, nombre, apellido, telefono, mail):
+        c=ClienteParticular(nombre, apellido)
+        super().nuevo_cliente(telefono, mail)
+        self.clientes.append(c)
+        
+        print(self.clientes)
