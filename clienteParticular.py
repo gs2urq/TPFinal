@@ -7,11 +7,8 @@ class ClienteParticular(Cliente):
         self.nombre = nombre
         self.apellido = apellido
         super().__init__(telefono, mail, id_cliente)
-        self.clientes=[]
-        
-    def nuevo_paticular(self, nombre, apellido, telefono, mail):
-        c=ClienteParticular(nombre, apellido)
-        super().nuevo_cliente(telefono, mail)
-        self.clientes.append(c)
-        
-        print(self.clientes)
+
+    def __str__(self):
+        cadena = f"{self.id_cliente}: {self.nombre} {self.apellido}\n"
+        cadena+= f"Contacto: {self.telefono} - {self.mail}\n"
+        return cadena
