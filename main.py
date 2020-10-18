@@ -4,6 +4,7 @@ class Menu:
     def __init__(self):
         self.lista_clientes = ListaClientes()
         self.opciones= {
+            "4": self.actualizar_cliente,
             "3": self.borrar_cliente,
             "2": self.mostrar_clientes,
             "1": self.nuevo_cliente,
@@ -15,6 +16,7 @@ Menú del sistema:
 1. Nuevo Cliente
 2. Mostrar Clientes
 3. Borrar Cliente
+4. Actualizar Cliente
 0. Salir
 """)
 
@@ -29,16 +31,33 @@ Menú del sistema:
                 print("{0} no es una opcion valida".format(opcion))
 
     def mostrar_clientes(self, lista = None):
-        
-        if lista == None:
-            lista = self.lista_clientes.lista
-
-            for cliente in lista:
-
-                print ("=="*25)
-                print (cliente)
-        
-                
+        print("""
+1. Mostrar todos los clientes
+2. Mostrar clientes corporativos
+3. Mostrar clientes particulares
+""")
+        opcion=input("Ingrese una opcion: ")
+        if opcion == "1":
+            if lista == None:
+                lista = self.lista_clientes.lista
+                print("Todos los clientes")
+                for cliente in lista:
+                    print ("=="*25)
+                    print (cliente)
+        elif opcion == "2":
+            if lista == None:
+                lista = self.lista_clientes.listac
+                print("Clientes corporativos")
+                for cliente in lista:
+                    print ("=="*25)
+                    print (cliente)
+        else:
+            if lista == None:
+                lista = self.lista_clientes.listap
+                print("Clientes particulares")
+                for cliente in lista:
+                    print ("=="*25)
+                    print (cliente)
               
     def nuevo_cliente(self):
         tipo = "A"
@@ -63,7 +82,99 @@ Menú del sistema:
         else:
             print("Cliente cargado correctamente")
 
-
+    def actualizar_cliente(self):
+        l = self.lista_clientes.lista
+        c = self.lista_clientes.listac
+        p = self.lista_clientes.listap
+        print("Si el tipo de cliente que desea modificar es Corporativo ingrese c")
+        print("Si el tipo de cliente que desea modificar es Particular ingrese p")
+        tipo = input("Ingrese el tipo de cliente: ")
+        if tipo == "c" or tipo == "C":
+            print("Estos son todos los clientes corporativos")
+            for i in c:
+                print("=="*25)
+                print(i)
+                print("=="*25)
+            opcion=int(input("Ingrese el ID del cliente que desea modificar: "))
+            n = self.lista_clientes.busca_id(opcion)
+            if n != None:
+                for i in c:
+                    if i.id_cliente == n.id_cliente:
+                        print(n)
+                        print("Si no desea cambiar este dato precione enter")
+                        ne=input("Ingrese el nombre de la empresa: ")
+                        nc=input("Ingrese el nombre de contacto: ")
+                        tc=input("Ingrese el telefono de contacto: ")
+                        tel=input("Ingrese un telefono: ")
+                        mail=input("Ingrese un correo electronico: ")
+                        if ne == "":
+                            ne = n.nombre_empresa
+                        else:
+                            n.nombre_empresa = ne
+                        if nc == "":
+                            nc = n.nombre_contacto
+                        else:
+                            n.nombre_contacto = nc
+                        if tc == "":
+                            tc = n.telefono_contacto
+                        else:
+                            n.telefono_contacto = tc
+                        if tel == "":
+                            tel = n.telefono
+                        else:
+                            n.telefono = tel
+                        if mail == "":
+                            mail = n.mail
+                        else:
+                            n.mail = mail
+                        for i in l:
+                            if i.id_cliente == n.id_cliente:
+                                i = n
+                        print(f"Cliente actializado {n}")
+                        self.lista_clientes.rc.update(n)
+            print(f"ID {opcion} no es cliente corporativo o se actualizo recientemente")
+        else:
+            print("Estos son todos los clientes particulares")
+            for i in p:
+                print("=="*25)
+                print(i)
+                print("=="*25)
+            opcion=int(input("Ingrese el ID del cliente que desea modificar: "))
+            n = self.lista_clientes.busca_id(opcion)
+            if n != None:
+                for i in p:
+                    if i.id_cliente == n.id_cliente:
+                        print("Si no desea cambiar este dato precione enter")
+                        nombre=input("Ingrese el nombre: ")
+                        apellido=input("Ingrese el apellido: ")
+                        tel=input("Ingrese un telefono: ")
+                        mail=input("Ingrese un correo electronico: ")
+                        if n == "":
+                            nombre = n.nombre
+                        else:
+                            n.nombre = nombre
+                        if apellido == "":
+                            apellido = n.apellido
+                        else:
+                            n.apellido = apellido
+                        if tel == "":
+                            tel = n.telefono
+                        else:
+                            n.telefono = tel
+                        if mail == "":
+                            mail = n.mail
+                        else:
+                            n.mail = mail
+                        for i in l:
+                            if i.id_cliente == n.id_cliente:
+                                i = n
+                        print(f"Cliente actualizado {n}")
+                        self.lista_clientes.rc.update(n)
+                else:
+                    print(f"ID {opcion} no es cliente particular o se actualizo recientemente")
+            else:
+                print(f"Error. El ID {opcion} no existe")
+        
     def borrar_cliente(self):
         c = self.lista_clientes.lista
         for i in c:
