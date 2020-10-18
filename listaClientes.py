@@ -7,7 +7,8 @@ class ListaClientes:
     def __init__(self):
         self.rc = RepositorioClientes()
         self.lista = self.rc.get_all()
-        
+        self.listac = self.rc.get_all_corporativos()
+        self.listap = self.rc.get_all_particulares()
 
 
     def nuevo_cliente_corporativo(self, nombre_empresa, nombre_contacto,
@@ -30,4 +31,11 @@ class ListaClientes:
             self.lista.append(c)
             return c
 
-    
+    def busca_id(self, id_cliente):
+        c = self.lista
+        n = id_cliente
+        for i in c:
+            if i.id_cliente == n:
+                return i
+        return None
+            
