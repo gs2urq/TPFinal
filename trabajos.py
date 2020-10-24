@@ -9,7 +9,6 @@ class Trabajos:
         self.rt = RepositorioTrabajos()
         self.hoy = datetime.date.today()
         self.lista_clientes = ListaClientes()
-
         
 
     def nuevo_trabajo(self):
