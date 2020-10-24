@@ -62,4 +62,13 @@ class Trabajos:
             self.rt.update(trabajo)
             print("Trabajo entregado")
 
+    def trabajo_cancelado(self):
+        opcion = int(input("Ingrese el ID del trabajo cancelado: "))
+        trabajo = self.rt.get_one(opcion)
+        if trabajo == None:
+            print(f"Error. ID {opcion} no existe")
+        else:
+            self.rt.delete(trabajo)
+            print("Trabajo cancelado")
+
     
