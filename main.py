@@ -101,7 +101,7 @@ Menú del sistema:
                 for i in c:
                     if i.id_cliente == n.id_cliente:
                         print(n)
-                        print("Si no desea cambiar este dato precione enter")
+                        print("Si no desea cambiar este dato presione enter")
                         ne=input("Ingrese el nombre de la empresa: ")
                         nc=input("Ingrese el nombre de contacto: ")
                         tc=input("Ingrese el telefono de contacto: ")
