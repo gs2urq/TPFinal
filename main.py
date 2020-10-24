@@ -1,9 +1,16 @@
 import sys
 from listaClientes import ListaClientes
+from trabajos import Trabajos
 class Menu:
     def __init__(self):
         self.lista_clientes = ListaClientes()
+        self.t = Trabajos()
         self.opciones= {
+            "9": self.t.modificar_trabajo,
+            "8": self.t.trabajo_cancelado,
+            "7": self.t.trabajo_entregado,
+            "6": self.t.trabajo_finalizado,
+            "5": self.t.nuevo_trabajo,
             "4": self.actualizar_cliente,
             "3": self.borrar_cliente,
             "2": self.mostrar_clientes,
@@ -17,6 +24,11 @@ Menú del sistema:
 2. Mostrar Clientes
 3. Borrar Cliente
 4. Actualizar Cliente
+5. Nuevo trabajo
+6. Marcar trabajo como finalizado
+7. Marcar trabajo como entregado
+8. Marcar trabajo como cancelado
+9. Modificar trabajo
 0. Salir
 """)
 
@@ -191,6 +203,7 @@ Menú del sistema:
                     print("Cliente borrado exitosamente")
                     print("Lista de clientes actualizada")
                     self.mostrar_clientes()
+    
                 
 
 

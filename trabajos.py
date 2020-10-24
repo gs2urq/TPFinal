@@ -36,7 +36,7 @@ class Trabajos:
         fep = datetime.datetime.strptime(fecha, "%Y,%m,%d")
         descripcion = input("Ingrese una breve descripcion sobre el trabajo; ")
         nt = Trabajo(c, hoy, fep, fer, descripcion, retirado)
-        print(nt)
+        print("Trabajo guardado exitosamente")
         self.rt.store(nt)
 
     def trabajo_finalizado(self):
