@@ -71,4 +71,37 @@ class Trabajos:
             self.rt.delete(trabajo)
             print("Trabajo cancelado")
 
-    
+    def modificar_trabajo(self):
+        opcion = int(input("Ingrese el ID del trabajo que desea modificar: "))
+        trabajo = self.rt.get_one(opcion)
+        if trabajo == None:
+            print(f"Error. ID {opcion} no existe")
+        else:
+            print("Si no desea cambiar este dato presione enter")
+            fi = input("Ingrese la fecha de ingreso (yyyy,mm,d): ")
+            fep = input("Ingrese la fecha de entrega propuesta (yyyy,mm,d): ")
+            descripcion = input("Ingrese una breve descripcion sobre el trabajo; ")
+            retirado = input("Si el trabajo fue entregado ingrese s de lo contrario n: ")
+            if fi == "":
+                fi = trabajo.fecha_ingreso
+            else:
+                fecha = datetime.datetime.strptime(fi, "%Y,%m,%d")
+                trabajo.fecha_ingreso = fecha
+            if fep == "":
+                fep = trabajo.fecha_entrega_propuesta
+            else:
+                fechap = datetime.datetime.strptime(fep, "%Y,%m,%d")
+                trabajo.fecha_entrega_propuesta = fechap
+            if descripcion == "":
+                descripcion = trabajo.descripcion
+            else:
+                trabajo.descripcion = descripcion
+            if retirado == "":
+                retirado = t.retirado
+            else:
+                if retirado == "s" or retirado == "S":
+                    trabajo.retirado = True
+                else:
+                    trabajo.retirado = False
+            print("Datos de trabajo actualizados")
+            self.rt.update(trabajo)
