@@ -1,6 +1,7 @@
 
 from datetime import date
 from guardar_cliente import Guardar_Cliente
+from guardar_trabajo import Guardar_trabajo
 import sys
 class Menu:
     # Mostrar un menú y responder a las opciones
@@ -12,6 +13,11 @@ class Menu:
             "3": self.modificar_cliente_particular,
             "4": self.modificar_cliente_corporativo,
             "5": self.buscar_cliente,
+            "6": self.agregar_trabajo,
+            "7": self.mostrar_trabajo,
+            "8": self.modificar_trabajo,
+            "9": self.trabajo_terminado,
+            "10": self.trabajo_terminado
         }
      def mostrar_menu(self):
         print(
@@ -187,6 +193,98 @@ class Menu:
         for i in listas:
             if i.id_cliente == filtro:
                 print(i)
+
+     def agregar_trabajo(self):
+        listatrabajo = self.lista_clientes.lista
+        for cliente in listatrabajo:
+            print(cliente)
+        filtro = int(input("Buscar id: "))
+        for i in listatrabajo:
+            if i.id_cliente == filtro:
+                print(i)
+                cliente = i
+                fecha_ingreso = date.today()
+                print("Fecha de entrega propuesta")
+                anio = int(input("Ingrese el año : "))
+                mes = int(input("Ingrese el mes: "))
+                dia = int(input("Ingrese el dia: "))
+                fecha_entrega_propuesta = date(anio, mes, dia)
+                descripcion = input("Ingrese una descirpción de trabajo: ")
+                t = self.lista_trabajo.NuevoTrabajo(cliente, fecha_ingreso, fecha_entrega_propuesta, descripcion)
+                if t is None:
+                    print(" Error al cargar trabajo")
+                else:
+
+                    print(" Trabajo cargado correctamente")
+            else:
+                print("Cliente no encontrado")
+
+     def mostrar_trabajo(self, listatrabajo=None):
+        if listatrabajo == None:
+            listatrabajo = self.lista_trabajo.listatrabajo
+        for trabajo in listatrabajo:
+          print(trabajo)
+
+     def modificar_trabajo(self):
+         id_trabajo = int(input("Ingrese el id del trabajo a modificar: "))
+         opc = int(input(""""Elija una opción para modificar o eliminar un trabajo:
+                 1. Descripción
+                 2. Fecha de ingreso
+                 3. Eliminar trabajo
+                 0. Salir """))
+         if opc == 1:
+            descrpicion = input("Ingrese la nueva descripción: ")
+            t = self.lista_trabajo.modificar_descripcion(descrpicion, id_trabajo)
+            if t == None:
+              print("ERROR AL MODIFICAR TRABAJO")
+            else:
+             print("MODIFICADO CORRECTAMENTE")
+         if opc == 2:
+             anio = int(input("Ingrese el año : "))
+             mes = int(input("Ingrese el mes: "))
+             dia = int(input("Ingrese el dia: "))
+             t = self.lista_trabajo.modificar_fecha_ingreso(date(anio, mes, dia), id_trabajo)
+             if t == None:
+                print("ERROR AL MODIFICAR TRABAJO")
+             else:
+                print("MODIFICADO CORRECTAMENTE")
+         if opc ==3:
+             self.lista_trabajo.eliminar_trabajo(id_trabajo)
+             t = self.lista_trabajo.eliminar_trabajo(id_trabajo)
+             self.lista_trabajo = Guardar_trabajo()
+             if t == None:
+                 print("ERROR AL BORRAR CLIENTE")
+             else:
+                 print("BORRADO CORRECTAMENTE")
+
+
+     def trabajo_terminado(self):
+        print("Indicar un trabajo que fue terminado")
+        lista = self.lista_trabajo.listatrabajo
+        for tr in lista:
+            print(tr)
+        id_trabajo = int(input("ID del trabajo terminado: "))
+        fecha_entrega_real = date.today()
+        t = self.lista_trabajo.trabajo_terminado(fecha_entrega_real, id_trabajo)
+        if t == None:
+                print("ERROR AL TERMINAR TRABAJO")
+        else:
+                print("TRABAJO TERMINADO CORRECTAMENTE")
+
+
+     def trabajo_retirado(self):
+         print("Indicar si el trabajo fue retirado")
+         lista = self.lista_trabajo.listatrabajo
+         for tr in lista:
+             print(tr)
+         id_trabajo = int(input("ID del trabajo retirado: "))
+         retirado = True
+         t = self.lista_trabajo.trabajo_entregado(retirado, id_trabajo)
+         if t == None:
+             print("ERROR AL TERMINAR TRABAJO")
+         else:
+             print("TRABAJO TERMINADO CORRECTAMENTE")
+            
      def salir(self):
             print("Gracias por utilizar el sistema.")
             sys.exit(0)
