@@ -51,4 +51,15 @@ class Trabajos:
             self.rt.update(trabajo)
             print ("Registrado como finalizado")
 
+    def trabajo_entregado(self):
+        hoy = self.hoy
+        opcion = int(input("Ingrese el ID del trabajo entregado: "))
+        trabajo = self.rt.get_one(opcion)
+        if trabajo == None:
+            print(f"Error. ID {opcion} no existe")
+        else:
+            trabajo.retirado = True
+            self.rt.update(trabajo)
+            print("Trabajo entregado")
+
     
