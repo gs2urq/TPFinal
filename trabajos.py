@@ -9,6 +9,7 @@ class Trabajos:
         self.rt = RepositorioTrabajos()
         self.hoy = datetime.date.today()
         self.lista_clientes = ListaClientes()
+        self.lista_trabajos = self.rt.get_all()
         
 
     def nuevo_trabajo(self):
@@ -41,6 +42,12 @@ class Trabajos:
 
     def trabajo_finalizado(self):
         hoy = self.hoy
+        lista = self.lista_trabajos
+        for i in lista:
+            print(f"ID trabajo:{i.id_trabajo}")
+            print(f"Descripcion trabajo: {i.descripcion}")
+            print(f"Cliente: {i.cliente}")
+            print("=="*25)
         opcion = int(input("Ingrese el ID del trabajo finalizado: "))
         trabajo = self.rt.get_one(opcion)
         if trabajo == None:
@@ -52,6 +59,12 @@ class Trabajos:
 
     def trabajo_entregado(self):
         hoy = self.hoy
+        lista = self.lista_trabajos
+        for i in lista:
+            print(f"ID trabajo:{i.id_trabajo}")
+            print(f"Descripcion trabajo: {i.descripcion}")
+            print(f"Cliente: {i.cliente}")
+            print("=="*25)
         opcion = int(input("Ingrese el ID del trabajo entregado: "))
         trabajo = self.rt.get_one(opcion)
         if trabajo == None:
@@ -62,6 +75,12 @@ class Trabajos:
             print("Trabajo entregado")
 
     def trabajo_cancelado(self):
+        lista = self.lista_trabajos
+        for i in lista:
+            print(f"ID trabajo:{i.id_trabajo}")
+            print(f"Descripcion trabajo: {i.descripcion}")
+            print(f"Cliente: {i.cliente}")
+            print("=="*25)
         opcion = int(input("Ingrese el ID del trabajo cancelado: "))
         trabajo = self.rt.get_one(opcion)
         if trabajo == None:
@@ -71,6 +90,12 @@ class Trabajos:
             print("Trabajo cancelado")
 
     def modificar_trabajo(self):
+        lista = self.lista_trabajos
+        for i in lista:
+            print(f"ID trabajo:{i.id_trabajo}")
+            print(f"Descripcion trabajo: {i.descripcion}")
+            print(f"Cliente: {i.cliente}")
+            print("=="*25)
         opcion = int(input("Ingrese el ID del trabajo que desea modificar: "))
         trabajo = self.rt.get_one(opcion)
         if trabajo == None:
@@ -104,3 +129,34 @@ class Trabajos:
                     trabajo.retirado = False
             print("Datos de trabajo actualizados")
             self.rt.update(trabajo)
+
+    def informe_trabajos(self):
+        trabajos = []
+        lista = self.lista_trabajos
+        hoy = self.hoy
+        for i in range(365):
+            f = hoy - datetime.timedelta(days=i)
+            trabajos.append(f)
+        alerta=[]
+        for i in (lista):
+            if i.fecha_entrega_propuesta != None:
+                n=i.fecha_entrega_propuesta
+                for a in trabajos:
+                    if n == a :
+                        alerta.append((i.id_trabajo, i.descripcion,
+                                       i.cliente, i.fecha_entrega_propuesta,
+                                       i.retirado))
+        if alerta !=[]:
+            print("Trabajos con fechas de entrega vencidas")
+            for i in alerta:
+                if i[4] == 0:
+                    print("=="*25)
+                    print (f"ID del trabajo:{i[0]}")
+                    print (f"Descripcion del trabajo:{i[1]}")
+                    print (f"Fecha que se habia propuesto la entrega:{i[3]}")
+                    print (f"Cliente:{i[2]}")
+                    print("=="*25)
+        else:
+            print("Hasta el momento los trabajos se entregaron a tiempo")
+
+        
