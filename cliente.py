@@ -8,4 +8,3 @@ class Cliente:
         self.id_cliente = id_cliente 
         self.telefono = telefono
         self.mail = mail 
-        
