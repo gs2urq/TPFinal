@@ -102,8 +102,8 @@ class Trabajos:
             print(f"Error. ID {opcion} no existe")
         else:
             print("Si no desea cambiar este dato presione enter")
-            fi = input("Ingrese la fecha de ingreso (yyyy,mm,d): ")
-            fep = input("Ingrese la fecha de entrega propuesta (yyyy,mm,d): ")
+            fi = input("Ingrese la fecha de ingreso (yyyy,mm,dd): ")
+            fep = input("Ingrese la fecha de entrega propuesta (yyyy,mm,dd): ")
             descripcion = input("Ingrese una breve descripcion sobre el trabajo; ")
             retirado = input("Si el trabajo fue entregado ingrese s de lo contrario n: ")
             if fi == "":
@@ -121,7 +121,7 @@ class Trabajos:
             else:
                 trabajo.descripcion = descripcion
             if retirado == "":
-                retirado = t.retirado
+                retirado = trabajo.retirado
             else:
                 if retirado == "s" or retirado == "S":
                     trabajo.retirado = True

@@ -19,7 +19,7 @@ class ListaClientes:
         if c.id_cliente == 0:
             return None
         else:
-            self.lista.append(c)
+            self.listac.append(c)
             return c
 
     def nuevo_cliente_particular(self, nombre, apellido, telefono, mail):
@@ -28,7 +28,7 @@ class ListaClientes:
         if c.id_cliente == 0:
             return None
         else:
-            self.lista.append(c)
+            self.listap.append(c)
             return c
 
     def busca_id(self, id_cliente):

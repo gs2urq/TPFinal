@@ -6,6 +6,7 @@ class Menu:
         self.lista_clientes = ListaClientes()
         self.t = Trabajos()
         self.opciones= {
+            "10": self.t.informe_trabajos,
             "9": self.t.modificar_trabajo,
             "8": self.t.trabajo_cancelado,
             "7": self.t.trabajo_entregado,
@@ -29,6 +30,7 @@ Menú del sistema:
 7. Marcar trabajo como entregado
 8. Marcar trabajo como cancelado
 9. Modificar trabajo
+10. Ver informe (Trabajos vencidos)
 0. Salir
 """)
 
@@ -72,6 +74,7 @@ Menú del sistema:
                     print (cliente)
               
     def nuevo_cliente(self):
+        lista = self.lista_clientes.lista
         tipo = "A"
         while tipo not in ("C", "c", "P", "p"):
             tipo = input("Ingrese el tipo de cliente: C:Corporativo / P:Particular: ")
@@ -202,7 +205,9 @@ Menú del sistema:
                 else:
                     print("Cliente borrado exitosamente")
                     print("Lista de clientes actualizada")
-                    self.mostrar_clientes()
+                    for i in c:
+                        print("=="*25)
+                        print(i)
     
                 
 
