@@ -1,4 +1,5 @@
 from datetime import date
+import datetime
 from trabajo import Trabajo
 from repositorioTrabajos import RepositorioTrabajos
 class Guardar_trabajo:
@@ -54,6 +55,6 @@ class Guardar_trabajo:
     def trabajo_entregado(self, retirado, id_trabajo):
         t = self.buscar_por_id(id_trabajo)
         if t:
-            t.retirado = retirado(True)
+            t.retirado = retirado
             return self.rt.update(t)
         return None
