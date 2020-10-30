@@ -7,5 +7,10 @@ class Cliente:
         # Si no se provee de un id, se crea el objeto con id "None"
         self.id_cliente = id_cliente 
         self.telefono = telefono
-        self.mail = mail 
-        
+        self.mail = mail
+
+    def coincide(self, filtro):
+        donde_filtrar = (self.id_cliente, self.telefono, self.mail)
+        for filtros in donde_filtrar:
+            if filtro in filtros:
+                return True
